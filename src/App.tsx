@@ -1,24 +1,52 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import ClassList from './components/ClassList';
+import { LoadingIcon } from './components/LoadingIcon';
+import Login from './components/Login';
 
-function App() {
+export interface classItem {
+  id: number,
+  name: string
+  students: string[]
+}
+
+export interface Istate {
+  classes: classItem[]
+}
+
+
+
+const App: React.FC = () => {
+  const [classes, setClasses] = useState<Istate['classes']>([
+    {
+      id: 1,
+      name: "cs01",
+      students: ['teki', 'ermi', 'abel', 'kebede', 'abebe']
+    },
+    {
+      id: 2,
+      name: 'CS02',
+      students: ['teki', 'ermi', 'abel']
+    },
+    {
+      id: 3,
+      name: 'CS03',
+      students: ['teki', 'ermi']
+    }
+  ])
+
+  const handleLogout = () => {
+    setClasses([])
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {
+        !(classes.length > 0) ? <Login /> : <>
+          <button onClick={handleLogout} className='logout-button'>Logout</button>
+          <ClassList classes={classes} />
+        </>
+      }
+      {/* {!(classes.length > 0) && <LoadingIcon />} */}
     </div>
   );
 }
