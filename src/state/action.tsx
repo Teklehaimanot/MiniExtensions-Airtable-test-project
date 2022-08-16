@@ -34,10 +34,9 @@ export const fetchClasses = (name: string) => {
     const filterBy = `Name = "${name}"`
     const link1 = `${url1}`
     const link2 = `${url2}`
-    console.log(process.env)
 
-    const fetch = (courseId: string) => {
-        return axios.get(`${link2}${courseId}`, {
+    const fetchByClassId = (classId: string) => {
+        return axios.get(`${link2}${classId}`, {
             headers: {
                 Authorization: `Bearer ${KEY}`
             }
@@ -53,7 +52,7 @@ export const fetchClasses = (name: string) => {
             })
             const value = res1.data.records[0].fields.Classes
             const result = await Promise.all(
-                value.map(fetch)
+                value.map(fetchByClassId)
             )
             const classes = result.map(item => item.data)
             dispatch(getClasses(classes))
