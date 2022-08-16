@@ -9,8 +9,8 @@ interface props {
 
 
 const ClassItem: React.FC<props> = ({ item }) => {
-    const url1 = 'https://api.airtable.com/v0/app8ZbcPx7dkpOnP0/Students'
-    const KEY = 'keywqP1hV8asNFzQ6'
+    const url1 = process.env.REACT_APP_URL1
+    const KEY = process.env.REACT_APP_Key
     const [students, setStudents] = useState<any>([])
 
     useEffect(() => {

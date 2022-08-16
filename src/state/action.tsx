@@ -27,14 +27,14 @@ const resetClasses = (): ResetAction => (
 )
 
 export const fetchClasses = (name: string) => {
-
-    const url1 = 'https://api.airtable.com/v0/app8ZbcPx7dkpOnP0/Students'
-    const url2 = 'https://api.airtable.com/v0/app8ZbcPx7dkpOnP0/Classes/'
+    const KEY = process.env.REACT_APP_Key
+    const url1 = process.env.REACT_APP_URL1
+    const url2 = process.env.REACT_APP_URL2
     const query = '?filterByFormula='
     const filterBy = `Name = "${name}"`
-    const KEY = 'keywqP1hV8asNFzQ6'
     const link1 = `${url1}`
     const link2 = `${url2}`
+    console.log(process.env)
 
     const fetch = (courseId: string) => {
         return axios.get(`${link2}${courseId}`, {
